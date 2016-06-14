@@ -8,11 +8,12 @@ public class ServerBuilder {
 
     public ServerBuilder withCapacity(int capacity) {
         this.capacity = capacity;
-        return new ServerBuilder();
+        return this;
     }
 
     public Server build() {
-        return new Server();
+
+        return new Server(capacity);
     }
 
 
@@ -20,7 +21,7 @@ public class ServerBuilder {
 
     public static ServerBuilder server() {
 
-        return null;
+        return new ServerBuilder();
 
     }
 }
