@@ -8,11 +8,11 @@ public class VmBuilder implements Builder<Vm> {
 
     public VmBuilder ofSize(int size) {
         this.size = size;
-        return new VmBuilder();
+        return this;
     }
 
     public Vm build() {
-        return new Vm();
+        return new Vm(size);
     }
 
     public static VmBuilder vm() {

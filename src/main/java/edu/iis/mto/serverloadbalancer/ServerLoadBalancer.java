@@ -5,8 +5,8 @@ package edu.iis.mto.serverloadbalancer;
  */
 public class ServerLoadBalancer {
     public static void balance(Server[] servers, Vm[] vmses) {
-        if(vmses.length>0){
-            servers[0].currentLoadPercentage = 100.0d;
+        if (vmses.length > 0) {
+            servers[0].currentLoadPercentage =(double) vmses[0].size / (double)servers[0].capacity * 100.0d;
         }
     }
 }
