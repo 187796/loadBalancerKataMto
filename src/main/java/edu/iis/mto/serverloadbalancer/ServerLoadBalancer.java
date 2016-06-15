@@ -7,7 +7,14 @@ public class ServerLoadBalancer {
     public static void balance(Server[] servers, Vm[] vmses) {
 
         for (Vm vm :vmses) {
-            servers[0].addVm(vm);
+            Server lessLoadedServer = null;
+            for (Server server : servers) {
+                if(lessLoadedServer == null || server.currentLoadPercentage < lessLoadedServer.currentLoadPercentage){
+                    lessLoadedServer = server;
+                }
+            }
+
+            lessLoadedServer.addVm(vm);
         }
     }
 }
