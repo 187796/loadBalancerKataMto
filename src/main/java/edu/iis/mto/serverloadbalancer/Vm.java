@@ -9,5 +9,9 @@ public class Vm {
         this.size = size;
     }
 
-    public int size;
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
 }

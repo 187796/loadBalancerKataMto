@@ -9,14 +9,14 @@ import java.util.List;
 public class Server {
 
     public static final double MAXIMUM_LOAD = 100.0d;
-    public double currentLoadPercentage;
-    public int capacity;
+    private double currentLoadPercentage;
+    private int capacity;
 
     private List<Vm> vms = new ArrayList<Vm>();
 
 
     public Server(int capacity) {
-        this.capacity = capacity;
+        this.setCapacity(capacity);
     }
 
     public boolean contain(Vm theVm) {
@@ -24,12 +24,12 @@ public class Server {
     }
 
     public void addVm(Vm vmse) {
-        currentLoadPercentage += loadOfVm(vmse);
+        setCurrentLoadPercentage(getCurrentLoadPercentage() + loadOfVm(vmse));
         vms.add(vmse);
     }
 
     private double loadOfVm(Vm vmse) {
-        return (double) vmse.size / (double)capacity * MAXIMUM_LOAD;
+        return (double) vmse.getSize() / (double) getCapacity() * MAXIMUM_LOAD;
     }
 
     public int countVms() {
@@ -37,6 +37,22 @@ public class Server {
     }
 
     public boolean canFit(Vm vm) {
-        return currentLoadPercentage + loadOfVm(vm) <= MAXIMUM_LOAD;
+        return getCurrentLoadPercentage() + loadOfVm(vm) <= MAXIMUM_LOAD;
+    }
+
+    public double getCurrentLoadPercentage() {
+        return currentLoadPercentage;
+    }
+
+    public void setCurrentLoadPercentage(double currentLoadPercentage) {
+        this.currentLoadPercentage = currentLoadPercentage;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
