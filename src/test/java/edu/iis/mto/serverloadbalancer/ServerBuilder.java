@@ -15,4 +15,7 @@ public class ServerBuilder {
     public Server build() {
         return new Server(capacity);
     }
+    public static ServerBuilder server() {
+        return new ServerBuilder();
+    }
 }
