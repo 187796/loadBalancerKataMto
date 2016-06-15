@@ -5,8 +5,9 @@ package edu.iis.mto.serverloadbalancer;
  */
 public class ServerLoadBalancer {
     public static void balance(Server[] servers, Vm[] vmses) {
-        if (vmses.length > 0) {
-            servers[0].addVm(vmses[0]);
+
+        for (Vm vm :vmses) {
+            servers[0].addVm(vm);
         }
     }
 }
