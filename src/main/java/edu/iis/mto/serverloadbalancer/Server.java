@@ -11,4 +11,8 @@ public class Server {
 
         this.capacity = capacity;
     }
+
+    public boolean contain(Vm vm) {
+        return true;
+    }
 }
