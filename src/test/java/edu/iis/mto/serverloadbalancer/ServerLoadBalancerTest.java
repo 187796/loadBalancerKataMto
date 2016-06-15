@@ -18,7 +18,7 @@ public class ServerLoadBalancerTest {
 
 	@Test
 	public void balancingServer_noVms_serverStaysEmpty(){
-		Server server = a(server().witCapacity(1));
+		Server server = a(server().withCapacity(1));
 
 		balancing(aServersListWith(server),anEmptyListOfVms());
 
@@ -27,7 +27,7 @@ public class ServerLoadBalancerTest {
 
 	@Test
 	public void balancingAServerWithOneSlotCapacity_andOneSlotVm_fillsTheServerWithVm(){
-		Server server = a(server().witCapacity(1));
+		Server server = a(server().withCapacity(1));
 		Vm vm = a(vm().withSize(1));
 		balancing(aServersListWith(server),aVmsListWith(vm));
 
@@ -37,7 +37,7 @@ public class ServerLoadBalancerTest {
 
 	@Test
 	public void balancingServerWithTenSlotCapacity_andOneSlotVm_fillsServerWithTenPercent(){
-		Server server = a(server().witCapacity(10));
+		Server server = a(server().withCapacity(10));
 		Vm vm = a(vm().withSize(1));
 		balancing(aServersListWith(server),aVmsListWith(vm));
 
@@ -47,7 +47,7 @@ public class ServerLoadBalancerTest {
 
 	@Test
 	public void balancingServerWithEnoughRoom_getsFilledWithAllVms(){
-		Server server = a(server().witCapacity(10));
+		Server server = a(server().withCapacity(10));
 		Vm vm1 = a(vm().withSize(1));
 		Vm vm2 = a(vm().withSize(2));
 		balancing(aServersListWith(server),aVmsListWith(vm1,vm2));
@@ -58,7 +58,18 @@ public class ServerLoadBalancerTest {
 
 	}
 
+	@Test
+	public void aVm_shouldBeBalanced_onLessLoadedServer(){
+		Server server1 = a(server().withCapacity(10).withCurrentLoadOf(50.0d));
+		Server server2 = a(server().withCapacity(10).withCurrentLoadOf(45.0d));
 
+		Vm vm1 = a(vm().withSize(1));
+		balancing(aServersListWith(server1,server2),aVmsListWith(vm1));
+
+		assertThat("server2 should contain vm",server2.contain(vm1));
+		assertThat("server1 should not  contain vm",!server1.contain(vm1));
+
+	}
 
 
 	private Vm[] aVmsListWith(Vm... vms) {
