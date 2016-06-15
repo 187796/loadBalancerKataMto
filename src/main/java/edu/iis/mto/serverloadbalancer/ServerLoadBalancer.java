@@ -15,7 +15,7 @@ public class ServerLoadBalancer {
     }
 
     private static void addToLessLoadedServer(Server[] servers, Vm vm) {
-        List<Server> capableServers = findCapableServers(servers, vm);
+        List<Server> capableServers =  findCapableServers(servers, vm);
 
         Server lessLoadedServer = findLessLoadedServer(capableServers);
         if(lessLoadedServer !=null) {
