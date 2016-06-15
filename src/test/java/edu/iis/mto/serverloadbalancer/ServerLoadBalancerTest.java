@@ -1,11 +1,11 @@
 package edu.iis.mto.serverloadbalancer;
 
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentageMatcher.hasCurrentLoadOf;
 import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
+import static edu.iis.mto.serverloadbalancer.ServerVmsCountMatcher.hasVmsCountOf;
 import static edu.iis.mto.serverloadbalancer.VmBuilder.vm;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -50,9 +50,6 @@ public class ServerLoadBalancerTest {
     
     }
 
-    private Matcher<? super Server> hasVmsCountOf(int expectedCount) {
-        return new ServerVmsCountMatcher(expectedCount);
-    }
 
     @Test
     public void balancingOneServerWithTenSlotsCapacity_andOneSlotVm_fillsServerWithTenPercent(){
