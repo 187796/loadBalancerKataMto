@@ -32,7 +32,7 @@ public class ServerLoadBalancerTest {
 		balancing(aServersListWith(server),aVmsListWith(vm));
 
 		assertThat(server,hasCurrentLoadOf(100.0d));
-		assertThat("server should contain vm",server.contain(vm));
+		assertThat("server should contain vm",server.contains(vm));
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class ServerLoadBalancerTest {
 		balancing(aServersListWith(server),aVmsListWith(vm));
 
 		assertThat(server,hasCurrentLoadOf(10.0d));
-		assertThat("server should contain vm",server.contain(vm));
+		assertThat("server should contain vm",server.contains(vm));
 	}
 
 	@Test
@@ -53,8 +53,8 @@ public class ServerLoadBalancerTest {
 		balancing(aServersListWith(server),aVmsListWith(vm1,vm2));
 
 		assertThat(server,hasVmCountOf(2));
-		assertThat("server should contain vm",server.contain(vm1));
-		assertThat("server should have 2 vms",server.contain(vm2));
+		assertThat("server should contain vm",server.contains(vm1));
+		assertThat("server should have 2 vms",server.contains(vm2));
 
 	}
 
@@ -66,9 +66,20 @@ public class ServerLoadBalancerTest {
 		Vm vm1 = a(vm().withSize(1));
 		balancing(aServersListWith(server1,server2),aVmsListWith(vm1));
 
-		assertThat("server2 should contain vm",server2.contain(vm1));
-		assertThat("server1 should not  contain vm",!server1.contain(vm1));
+		assertThat("server2 should contain vm",server2.contains(vm1));
+		assertThat("server1 should not  contain vm",!server1.contains(vm1));
 
+	}
+
+	@Test
+	public void severWithNotEnoughRoomShouldNotBeFilled(){
+		Server server = a(server().withCapacity(1));
+
+		Vm vm =  a(vm().withSize(2));
+
+		balancing(aServersListWith(server),aVmsListWith(vm));
+
+		assertThat("server should not contain vm",!server.contains(vm));
 	}
 
 
