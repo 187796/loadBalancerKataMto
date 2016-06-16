@@ -27,4 +27,8 @@ public class ServerVmLoadMatcher extends TypeSafeMatcher<Server>{
         description.appendText("server conaints vm conut of").appendValue(server.vmCount());
 
     }
+
+    public static ServerVmLoadMatcher hasCountOf(int expectedVmCount) {
+        return new ServerVmLoadMatcher(expectedVmCount);
+    }
 }

@@ -30,4 +30,8 @@ public class CurrentServerLoadMatcher extends TypeSafeMatcher<Server> {
     protected void describeMismatchSafely(Server server, Description description) {
         description.appendText("server has vm load of").appendValue(server.currentLoadOf);
     }
+
+   public static CurrentServerLoadMatcher hasCurrentLoadOf(double expectedLoad) {
+        return new CurrentServerLoadMatcher(expectedLoad);
+    }
 }
