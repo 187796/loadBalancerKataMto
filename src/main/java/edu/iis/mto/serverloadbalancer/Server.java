@@ -5,4 +5,11 @@ package edu.iis.mto.serverloadbalancer;
  */
 public class Server {
     public double currentLoadOf;
+    public int capacity;
+
+    public Server(int capacity) {
+
+        this.capacity = capacity;
+
+    }
 }
