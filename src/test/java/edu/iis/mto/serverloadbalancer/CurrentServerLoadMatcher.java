@@ -15,7 +15,11 @@ public class CurrentServerLoadMatcher extends TypeSafeMatcher<Server> {
     }
 
     protected boolean matchesSafely(Server server) {
-        return expectedLoad == server.currentLoadOf || Math.abs(expectedLoad - server.currentLoadOf) < 0.01d;
+        return doublesAreEqual(this.expectedLoad, server.currentLoadOf);
+    }
+
+    private boolean doublesAreEqual(double d1, double d2) {
+        return d1 == d2 || Math.abs(d1 - d2) < 0.01d;
     }
 
     public void describeTo(Description description) {
