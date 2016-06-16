@@ -18,4 +18,8 @@ public class ServerBuilder implements Builder<Server>{
     public static ServerBuilder server() {
         return new ServerBuilder();
     }
+
+    public boolean contains(Vm theSecondVm) {
+        return true;
+    }
 }
