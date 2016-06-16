@@ -15,7 +15,7 @@ public class ServerVmLoadMatcher extends TypeSafeMatcher<Server>{
     }
 
     protected boolean matchesSafely(Server server) {
-        return expectedVmCount == server.vmCount();
+        return expectedVmCount == server.vmsCount();
     }
 
     public void describeTo(Description description) {
@@ -24,7 +24,7 @@ public class ServerVmLoadMatcher extends TypeSafeMatcher<Server>{
 
     @Override
     protected void describeMismatchSafely(Server server, Description description) {
-        description.appendText("server conaints vm conut of").appendValue(server.vmCount());
+        description.appendText("server conaints vm conut of").appendValue(server.vmsCount());
 
     }
 

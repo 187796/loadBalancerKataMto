@@ -15,7 +15,7 @@ public class CurrentServerLoadMatcher extends TypeSafeMatcher<Server> {
     }
 
     protected boolean matchesSafely(Server server) {
-        return doublesAreEqual(this.expectedLoad, server.currentLoadOf);
+        return doublesAreEqual(this.expectedLoad, server.currentLoadPecentage);
     }
 
     private boolean doublesAreEqual(double d1, double d2) {
@@ -28,7 +28,7 @@ public class CurrentServerLoadMatcher extends TypeSafeMatcher<Server> {
 
     @Override
     protected void describeMismatchSafely(Server server, Description description) {
-        description.appendText("server has vm load of").appendValue(server.currentLoadOf);
+        description.appendText("server has vm load of").appendValue(server.currentLoadPecentage);
     }
 
    public static CurrentServerLoadMatcher hasCurrentLoadOf(double expectedLoad) {

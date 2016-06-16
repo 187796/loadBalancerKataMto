@@ -1,10 +1,9 @@
 package edu.iis.mto.serverloadbalancer;
 
-/**
- * Created by student on 2016-06-16.
- */
-public class ServerBuilder implements Builder<Server>{
+public class ServerBuilder implements Builder<Server> {
+
     private int capacity;
+    private double initialLoad;
 
     public ServerBuilder withCapacity(int capacity) {
         this.capacity = capacity;
@@ -12,14 +11,21 @@ public class ServerBuilder implements Builder<Server>{
     }
 
     public Server build() {
-        return new Server(capacity);
+        Server server = new Server(capacity);
+        if (initialLoad > 0) {
+            int expectedLoad = (int) (initialLoad / 100.0d * (double) server
+                    .capacity);
+            server.addVm(VmBuilder.vm().withSize(expectedLoad).build());
+        }
+        return server;
     }
 
     public static ServerBuilder server() {
         return new ServerBuilder();
     }
 
-    public boolean contains(Vm theSecondVm) {
-        return true;
+    public ServerBuilder withCurrentLoadOf(double initialLoad) {
+        this.initialLoad = initialLoad;
+        return this;
     }
 }
